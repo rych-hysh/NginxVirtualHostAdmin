@@ -44,3 +44,5 @@ frontInDev/typings
 # System files
 frontInDev/.DS_Store
 frontInDev/Thumbs.db
+
+back/node_modules
