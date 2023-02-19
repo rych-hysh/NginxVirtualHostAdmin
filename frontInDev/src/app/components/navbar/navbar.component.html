@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+	<button mat-icon-button (click)="sidenav.toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<span>Home</span>
+</mat-toolbar>
+
+
+<mat-sidenav-container>
+	<mat-sidenav #sidenav mode="side" [(opened)]="opened" autosize>
+		<div class="sidenav">
+			<button mat-button class="pagesnav" routerLink="home">
+				<h2> HOME </h2>
+			</button>
+			<button mat-button class="pagesnav" routerLink="sites">
+				<h2> SITES </h2>
+			</button>
+			<button mat-button class="pagesnav" routerLink="external">
+				<h2> External </h2>
+			</button>
+
+		</div>
+	</mat-sidenav>
+	<mat-sidenav-content class="content">
+
+		<router-outlet></router-outlet>
+		<button mat-button (click)="sidenav.toggle()" class="sidenavtoggle">
+			sidenav.toggle()
+		</button>
+
+
+
+	</mat-sidenav-content>
+</mat-sidenav-container>

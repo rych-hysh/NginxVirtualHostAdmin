@@ -1,0 +1,52 @@
+.tablecontainer{
+	width: 98%;
+	margin: 0 auto;
+}
+
+#siteslist{
+	margin: 0 auto;
+}
+
+.mat-column-id{
+	width: 5px;
+}
+
+.mat-column-host{
+	width: 200px;
+}
+
+.mat-column-state{
+	width: 200px;
+}
+
+#resetContainer{
+	width: 15%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-right: 1%;
+	margin-left: auto;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+}
+
+#resetButton{
+	margin-left: auto;
+	margin-right: 0;
+	width: 30%;
+}
+
+.submitButtons{
+	width: 30%;
+	margin-top: 1%;
+	margin-right: 1%;
+	margin-left: auto;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+}
+
+.submitButtons button{
+	width: 45%;
+}
+

@@ -1,0 +1,46 @@
+html
+tmp
+frontInDev/node_modules
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+frontInDev/dist
+frontInDev/tmp
+frontInDev/out-tsc
+frontInDev/bazel-out
+
+# Node
+frontInDev/node_modules
+frontInDev/npm-debug.log
+frontInDev/yarn-error.log
+
+# IDEs and editors
+frontInDev/.idea/
+frontInDev/.project
+frontInDev/.classpath
+frontInDev/.c9/
+frontInDev/*.launch
+frontInDev/.settings/
+frontInDev/*.sublime-workspace
+
+# Visual Studio Code
+frontInDev/.vscode/*
+frontInDev/!.vscode/settings.json
+frontInDev/!.vscode/tasks.json
+frontInDev/!.vscode/launch.json
+frontInDev/!.vscode/extensions.json
+frontInDev/.history/*
+
+# Miscellaneous
+frontInDev/.angular/cache
+frontInDev/.sass-cache/
+frontInDev/connect.lock
+frontInDev/coverage
+frontInDev/libpeerconnection.log
+frontInDev/testem.log
+frontInDev/typings
+
+# System files
+frontInDev/.DS_Store
+frontInDev/Thumbs.db

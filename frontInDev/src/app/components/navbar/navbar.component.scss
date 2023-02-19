@@ -1,0 +1,26 @@
+mat-toolbar{
+	padding: 0;
+	height: 10%;
+}
+mat-sidenav{
+	background-color: #6d76b5;
+}
+mat-sidenav-container{
+	height: 90%;
+}
+	
+.sidenavtoggle{
+	bottom: 10px;
+	position: fixed;
+}
+
+.sidenav{
+	
+	display: flex;
+	flex-flow: column;
+}
+
+.pagesnav{
+	margin: 30px;
+}
+
