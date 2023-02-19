@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "install": "npm run install:front && npm run install:back",
+    "install:front": "cd ./frontInDev && npm install",
+    "install:back": "cd ./back && npm install",
 		"start": "npm run start:back & sleep 3 && npm run start:front",
 		"start:front": "cd ./frontInDev && ng serve",
 		"start:back": "cd ./back && npx nodemon ./bin/www"
