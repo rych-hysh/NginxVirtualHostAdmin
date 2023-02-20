@@ -4,21 +4,33 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('back:server');
-var http = require('http');
+const app = require('../app');
+const debug = require('debug')('back:server');
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
+const config = require('config');
+const { exit } = require('process');
+config.env = process.env.NODE_ENV || "development";
 
+console.log(process.env.NODE_ENV);
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3030');
+var port = normalizePort(config.url.port || '3030');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTP or HTTPS server.
  */
-
+var server;
+if(config.url.protocol == "https"){
+  var options = {
+    key:  fs.readFileSync('/etc/letsencrypt/live/hryoichi.com-0001/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/hryoichi.com-0001/fullchain.pem')
+  }
+  server = https.createServer(options, app);
+}
 var server = http.createServer(app);
 
 /**

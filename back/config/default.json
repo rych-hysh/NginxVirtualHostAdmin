@@ -1,0 +1,8 @@
+{
+	"environment": "default",
+	"url": {
+		"protocol": "https",
+		"host": "hryoichi.com",
+		"port": 3030
+	}
+}

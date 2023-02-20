@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { config, Observable } from 'rxjs';
+
+import { ApiConfigService } from "./services/api-config.service";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'frontInDev';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private apiConfigService: ApiConfigService) {
 
   }
   ngOnInit() {
@@ -20,7 +23,7 @@ export class AppComponent {
   }
 
   getTest(): Observable<String> {
-    return this.http.get<String>("http://localhost:3030/connection");
+    return this.http.get<String>(this.apiConfigService.getApiUrl() + "connection");
 
   }
 
