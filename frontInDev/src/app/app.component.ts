@@ -15,15 +15,6 @@ export class AppComponent {
 
   }
   ngOnInit() {
-    console.log("[api connection test] start");
-    this.getTest().subscribe(val => {
-      console.log('[api connection test] success')
-    },
-      error => console.log(error))
-  }
-
-  getTest(): Observable<String> {
-    return this.http.get<String>(this.apiConfigService.getApiUrl() + "connection");
 
   }
 

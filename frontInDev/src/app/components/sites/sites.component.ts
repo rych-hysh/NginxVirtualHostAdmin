@@ -3,6 +3,9 @@ import { Site } from "../../models/site";
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { HostListService } from "../../services/host-list.service";
 
 var sitesAvailable: Site[] = [
   {id:1, host:"mock1.example.com", state:false, usage:"hoge", remarks:"This is mock."},
@@ -24,9 +27,26 @@ export class SitesComponent {
   AvailableSitesList = sitesAvailable;
   AvailableSitesListBackup: Site[] = [];
 
-  constructor(private dialog: MatDialog, private router: Router, private http: HttpClient) {}
+  constructor(private dialog: MatDialog, private router: Router, private http: HttpClient, private _snackbar: MatSnackBar, private hostListService: HostListService) {}
 
   ngOnInit(){
+    // if(!this.hostListService.isConnected()){
+    //   this._snackbar.open("api connection failed", "ok");
+    //   this.router.navigate(['/home']);
+    // }
+    this.hostListService.isConnected().subscribe({
+      next: (ok) => {
+        if(ok){
+          this._snackbar.open("api connection established", "ok");
+        }else{
+        this._snackbar.open("api connection failed", "ok");
+        this.router.navigate(['/home']);
+        }
+      },
+      error: (err) =>{ console.error(err);
+      }
+    })
+
     this.http.get<Site[]>("http://localhost:3030/sites").subscribe(list => {
       this.AvailableSitesList = list;
       this.AvailableSitesListBackup = JSON.parse(JSON.stringify(list));
