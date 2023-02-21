@@ -8,7 +8,8 @@
     "install:back": "cd ./back && npm install",
 		"start": "npm run start:back & sleep 3 && npm run start:front",
 		"start:front": "cd ./frontInDev && ng serve",
-		"start:back": "cd ./back && npx nodemon ./bin/www"
+		"start:back": "cd ./back && npx nodemon ./bin/www",
+    "build": "cd ./frontInDev && ng build --prod"
   }
 
 }
