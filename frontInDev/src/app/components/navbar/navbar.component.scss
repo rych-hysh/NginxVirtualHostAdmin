@@ -1,9 +1,11 @@
+
+
 mat-toolbar{
 	padding: 0;
 	height: 10%;
 }
 mat-sidenav{
-	background-color: #6d76b5;
+	background-color: #b9beeb;
 }
 mat-sidenav-container{
 	height: 90%;
@@ -11,7 +13,11 @@ mat-sidenav-container{
 	
 .sidenavtoggle{
 	bottom: 10px;
-	position: fixed;
+	margin-left: 10px;
+	position: fixed;	
+	background-color: #b9beeb;
+	padding: 10px;
+	border-radius: 10px;
 }
 
 .sidenav{
@@ -24,3 +30,6 @@ mat-sidenav-container{
 	margin: 30px;
 }
 
+.sidenavtogglebutton{
+
+}
