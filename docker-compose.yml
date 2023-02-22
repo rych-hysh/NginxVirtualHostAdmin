@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  back:
+    container_name: back
+    tty: true
+    build:
+      context: .
+      dockerfile: ./back/Dockerfile
+    ports:
+      - 3030:3030
+    volumes:
+      - ./back/:/server/
+      - /etc/nginx/:/etc/nginx/
+
+  front:
+    container_name: angular
+    tty: true
+    build:
+      context: .
+      dockerfile: ./frontInDev/Dockerfile
+    ports:
+      - 4200:4200
+    volumes:
+      - ./frontInDev/:/app/InDev/
+      - ./html/:/var/www/html/
+
