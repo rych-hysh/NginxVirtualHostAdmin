@@ -23,6 +23,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ExternalComponent } from './components/external/external.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     NavbarComponent,
     SitesComponent,
     SaveDialog,
-    CancelDialog
+    CancelDialog,
+    ExternalComponent
   ],
   imports: [
     BrowserModule,
