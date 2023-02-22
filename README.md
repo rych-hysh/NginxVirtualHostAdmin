@@ -41,5 +41,11 @@ run
 ```bash
 docker-compose up
 ```
+or
+
+```bash
+npm start
+```
+
 to start api server and web server.
 
