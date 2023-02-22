@@ -1,12 +1,14 @@
 <mat-toolbar color="primary">
-	<button mat-icon-button (click)="sidenav.toggle()">
+	<!-- <button mat-icon-button (click)="sidenav.toggle()">
 		<mat-icon>menu</mat-icon>
+	</button> -->
+	<button mat-button color="primary" href="">
+		<h1 style="color: white;padding: 5%;">NginxVirtualHostAdmin</h1>
 	</button>
-	<span>Home</span>
 </mat-toolbar>
 
-
-<mat-sidenav-container>
+<router-outlet></router-outlet>
+<!-- <mat-sidenav-container>
 	<mat-sidenav #sidenav mode="side" [(opened)]="opened" autosize>
 		<div class="sidenav">
 			<button mat-button class="pagesnav" routerLink="home">
@@ -33,4 +35,4 @@
 
 
 	</mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->

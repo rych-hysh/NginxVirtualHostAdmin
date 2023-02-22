@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { SitesComponent } from "./components/sites/sites.component";
-import { ExternalComponent } from "./components/external/external.component";
+import { LoginComponent } from "./components/login/login.component";
+import { HostsComponent } from "./components/hosts/hosts.component";
+import { of } from 'rxjs';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', component: HomeComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'sites', component: SitesComponent},
-  {path: 'external', component: ExternalComponent},
+  {path: '', pathMatch: 'full', component: LoginComponent},
+  {path: 'hosts', component: HostsComponent, canActivate:[]},
+  {path:"**", redirectTo:""}
 ];
 
 @NgModule({

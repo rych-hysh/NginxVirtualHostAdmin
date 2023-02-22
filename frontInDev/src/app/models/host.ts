@@ -1,4 +1,4 @@
-export interface Site{
+export interface Host{
 	id: Number,
 	host: String,
 	state: boolean,

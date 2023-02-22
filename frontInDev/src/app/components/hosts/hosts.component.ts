@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Site } from "../../models/site";
+import { Host } from "../../models/host";
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { HostListService } from "../../services/host-list.service";
 
-var sitesAvailable: Site[] = [
+var hostsAvailable: Host[] = [
   { id: 1, host: "mock1.example.com", state: false, usage: "hoge", remarks: "This is mock." },
   { id: 2, host: "mock.example.com", state: false, usage: "foo", remarks: "Please contact to admin." },
 ]
@@ -18,14 +18,14 @@ const httpOptions = {
   })
 }
 @Component({
-  selector: 'app-sites',
-  templateUrl: './sites.component.html',
-  styleUrls: ['./sites.component.scss']
+  selector: 'app-hosts',
+  templateUrl: './hosts.component.html',
+  styleUrls: ['./hosts.component.scss']
 })
-export class SitesComponent {
+export class HostsComponent {
   displayedColumns = ["id", "host", "state", "usage", "remarks"]
-  AvailableSitesList: Site[] = sitesAvailable;
-  AvailableSitesListBackup: Site[] = [];
+  AvailableHostsList: Host[] = hostsAvailable;
+  AvailableHostsListBackup: Host[] = [];
 
   constructor(private dialog: MatDialog, private router: Router, private http: HttpClient, private _snackbar: MatSnackBar, private hostListService: HostListService) { }
 
@@ -43,9 +43,9 @@ export class SitesComponent {
             // Todo: 関数化
             if (ok) {
               this._snackbar.open("api connection established", "ok");
-              this.http.get<Site[]>(this.hostListService.getApiURL("sites")).subscribe(list => {
-              this.AvailableSitesList = list;
-              this.AvailableSitesListBackup = JSON.parse(JSON.stringify(list));
+              this.http.get<Host[]>(this.hostListService.getApiURL("sites")).subscribe(list => {
+              this.AvailableHostsList = list;
+              this.AvailableHostsListBackup = JSON.parse(JSON.stringify(list));
               });
             } else {
               this._snackbar.open("api connection failed", "ok");
@@ -64,7 +64,7 @@ export class SitesComponent {
   }
 
   dataReset() {
-    this.AvailableSitesList = this.AvailableSitesListBackup;
+    this.AvailableHostsList = this.AvailableHostsListBackup;
   }
 
   openSaveDialog() {
@@ -72,7 +72,7 @@ export class SitesComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //登録処理
-        this.http.post<Site>(this.hostListService.getApiURL("sites/update"), JSON.stringify(this.AvailableSitesList), httpOptions).subscribe();
+        this.http.post<Host>(this.hostListService.getApiURL("hosts/update"), JSON.stringify(this.AvailableHostsList), httpOptions).subscribe();
         this.router.navigate(['/home']);
       }
     });

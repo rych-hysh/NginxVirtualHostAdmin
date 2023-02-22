@@ -7,12 +7,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 //Components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SitesComponent } from './components/sites/sites.component';
+import { HostsComponent } from './components/hosts/hosts.component';
 
-import { SaveDialog } from "./components/sites/sites.component";
-import { CancelDialog } from "./components/sites/sites.component";
+import { SaveDialog } from "./components/hosts/hosts.component";
+import { CancelDialog } from "./components/hosts/hosts.component";
 
 //Materials
 import { MatButtonModule } from '@angular/material/button';
@@ -23,17 +22,16 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { ExternalComponent } from './components/external/external.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NavbarComponent,
-    SitesComponent,
+    HostsComponent,
     SaveDialog,
     CancelDialog,
-    ExternalComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
