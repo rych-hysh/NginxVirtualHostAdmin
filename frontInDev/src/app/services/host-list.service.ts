@@ -10,8 +10,8 @@ export class HostListService {
 
   constructor(private http: HttpClient, private apiConfigService: ApiConfigService) { }
 
-  getApiURL(): String{
-    return this.apiConfigService.getApiUrl();
+  getApiURL(path: string = ""): string{
+    return this.apiConfigService.getApiUrl() + path;
   };
 
   isConnected(): Observable<boolean>{

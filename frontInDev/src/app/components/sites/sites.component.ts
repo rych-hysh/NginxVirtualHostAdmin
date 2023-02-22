@@ -8,15 +8,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HostListService } from "../../services/host-list.service";
 
 var sitesAvailable: Site[] = [
-  {id:1, host:"mock1.example.com", state:false, usage:"hoge", remarks:"This is mock."},
-  {id:2, host:"mock.example.com", state:false, usage:"foo", remarks:"Please contact to admin."}, 
+  { id: 1, host: "mock1.example.com", state: false, usage: "hoge", remarks: "This is mock." },
+  { id: 2, host: "mock.example.com", state: false, usage: "foo", remarks: "Please contact to admin." },
 ]
 
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
 @Component({
   selector: 'app-sites',
   templateUrl: './sites.component.html',
@@ -24,54 +24,64 @@ var sitesAvailable: Site[] = [
 })
 export class SitesComponent {
   displayedColumns = ["id", "host", "state", "usage", "remarks"]
-  AvailableSitesList = sitesAvailable;
+  AvailableSitesList: Site[] = sitesAvailable;
   AvailableSitesListBackup: Site[] = [];
 
-  constructor(private dialog: MatDialog, private router: Router, private http: HttpClient, private _snackbar: MatSnackBar, private hostListService: HostListService) {}
+  constructor(private dialog: MatDialog, private router: Router, private http: HttpClient, private _snackbar: MatSnackBar, private hostListService: HostListService) { }
 
-  ngOnInit(){
-    // if(!this.hostListService.isConnected()){
-    //   this._snackbar.open("api connection failed", "ok");
-    //   this.router.navigate(['/home']);
-    // }
-    this.hostListService.isConnected().subscribe({
-      next: (ok) => {
-        if(ok){
-          this._snackbar.open("api connection established", "ok");
-        }else{
-        this._snackbar.open("api connection failed", "ok");
-        this.router.navigate(['/home']);
-        }
-      },
-      error: (err) =>{ console.error(err);
+  async ngOnInit() {
+    this.http.post(this.hostListService.getApiURL("auth"), { "pass": "asdf" }, httpOptions).subscribe(val => {
+      if (!val) {
+        this.router.navigate(['/home']).finally(
+          () => {
+            this._snackbar.open("unauthorized", "ok");
+          }
+        );
+      } else {
+        this.hostListService.isConnected().subscribe({
+          next: (ok) => {
+            // Todo: 関数化
+            if (ok) {
+              this._snackbar.open("api connection established", "ok");
+              this.http.get<Site[]>(this.hostListService.getApiURL("sites")).subscribe(list => {
+              this.AvailableSitesList = list;
+              this.AvailableSitesListBackup = JSON.parse(JSON.stringify(list));
+              });
+            } else {
+              this._snackbar.open("api connection failed", "ok");
+              this.router.navigate(['/home']);
+            }
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        })
       }
-    })
-
-    this.http.get<Site[]>("http://localhost:3030/sites").subscribe(list => {
-      this.AvailableSitesList = list;
-      this.AvailableSitesListBackup = JSON.parse(JSON.stringify(list));
     });
+
+
+
   }
 
-  dataReset(){
+  dataReset() {
     this.AvailableSitesList = this.AvailableSitesListBackup;
   }
 
-  openSaveDialog(){
+  openSaveDialog() {
     const dialogRef = this.dialog.open(SaveDialog);
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         //登録処理
-        this.http.post<Site>("http://localhost:3030/sites/update", JSON.stringify(this.AvailableSitesList), httpOptions).subscribe();
+        this.http.post<Site>(this.hostListService.getApiURL("sites/update"), JSON.stringify(this.AvailableSitesList), httpOptions).subscribe();
         this.router.navigate(['/home']);
       }
     });
   }
 
-  openCancelDialog(){
+  openCancelDialog() {
     const dialogRef = this.dialog.open(CancelDialog);
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.router.navigate(['/home']);
       }
     });
@@ -84,10 +94,10 @@ export class SitesComponent {
   templateUrl: '../../resources/saveDialog.html',
 })
 //'/frontInDev/src/app/resources/saveDialog.html'
-export class SaveDialog {}
+export class SaveDialog { }
 
 @Component({
   selector: 'cancel-dialog',
   templateUrl: '../../resources/cancelDialog.html'
 })
-export class CancelDialog {}
+export class CancelDialog { }
