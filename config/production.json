@@ -4,5 +4,7 @@
 		"protocol": "https",
 		"host": "hryoichi.com",
 		"port": 3030
-	}
+	},
+	"pathToKey": "/path/to/privatekey",
+	"pathToCert": "/path/to/cert"
 }

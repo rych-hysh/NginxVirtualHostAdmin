@@ -1,0 +1,32 @@
+// #wrapper{
+// 	width: 100%;
+// 	margin: auto;
+// }
+#pass_container{
+}
+#login_container{
+	margin: 10vh auto;
+	display: flex;
+	flex-flow: column;
+	width: 40vw;
+	justify-content: center;
+	background-color: teal;
+	padding: 5vh;
+	border-radius: 3vh;
+}
+span{
+	font-size: xx-large;
+	width: 20%;
+}
+input{
+	width: 70%;
+	padding: 1%;
+	margin-right: 0;
+	margin-left: auto;
+	font-size: xx-large;
+}
+button{
+	font-size:xx-large;
+	margin: 5% auto;
+	
+}

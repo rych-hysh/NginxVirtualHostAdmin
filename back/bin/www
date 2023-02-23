@@ -10,10 +10,9 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const config = require('config');
-const { exit } = require('process');
 config.env = process.env.NODE_ENV || "development";
 
-console.log(process.env.NODE_ENV);
+console.log(config.environment);
 /**
  * Get port from environment and store in Express.
  */
@@ -26,12 +25,13 @@ app.set('port', port);
 var server;
 if(config.url.protocol == "https"){
   var options = {
-    key:  fs.readFileSync('/etc/letsencrypt/live/hryoichi.com-0001/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/hryoichi.com-0001/fullchain.pem')
+    key:  fs.readFileSync(config.pathToKey),
+    cert: fs.readFileSync(config.pathToCert)
   }
   server = https.createServer(options, app);
+}else{
+  server = http.createServer(app);
 }
-var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

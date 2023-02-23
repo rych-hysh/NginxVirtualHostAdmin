@@ -30,37 +30,27 @@ export class HostsComponent {
   constructor(private dialog: MatDialog, private router: Router, private http: HttpClient, private _snackbar: MatSnackBar, private hostListService: HostListService) { }
 
   async ngOnInit() {
-    this.http.post(this.hostListService.getApiURL("auth"), { "pass": "asdf" }, httpOptions).subscribe(val => {
-      if (!val) {
-        this.router.navigate(['/home']).finally(
-          () => {
-            this._snackbar.open("unauthorized", "ok");
-          }
-        );
-      } else {
-        this.hostListService.isConnected().subscribe({
-          next: (ok) => {
-            // Todo: 関数化
-            if (ok) {
-              this._snackbar.open("api connection established", "ok");
-              this.http.get<Host[]>(this.hostListService.getApiURL("sites")).subscribe(list => {
-              this.AvailableHostsList = list;
-              this.AvailableHostsListBackup = JSON.parse(JSON.stringify(list));
-              });
-            } else {
-              this._snackbar.open("api connection failed", "ok");
-              this.router.navigate(['/home']);
-            }
-          },
-          error: (err) => {
-            console.error(err);
-          }
-        })
+
+
+    this.hostListService.isConnected().subscribe({
+      next: (ok) => {
+        // Todo: 関数化
+        if (ok) {
+          this._snackbar.open("logged in", "ok");
+          this._snackbar.open("api connection established", "ok");
+          this.http.get<Host[]>(this.hostListService.getApiURL("sites")).subscribe(list => {
+            this.AvailableHostsList = list;
+            this.AvailableHostsListBackup = JSON.parse(JSON.stringify(list));
+          });
+        } else {
+          this._snackbar.open("api connection failed", "ok");
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err) => {
+        console.error(err);
       }
-    });
-
-
-
+    })
   }
 
   dataReset() {
@@ -72,8 +62,8 @@ export class HostsComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //登録処理
-        this.http.post<Host>(this.hostListService.getApiURL("hosts/update"), JSON.stringify(this.AvailableHostsList), httpOptions).subscribe();
-        this.router.navigate(['/home']);
+        this.http.post<Host>(this.hostListService.getApiURL("sites/update"), JSON.stringify(this.AvailableHostsList), httpOptions).subscribe();
+        this.router.navigate(['/']);
       }
     });
   }
@@ -82,7 +72,7 @@ export class HostsComponent {
     const dialogRef = this.dialog.open(CancelDialog);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
     });
   }

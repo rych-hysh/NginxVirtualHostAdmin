@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, Observable, of, Subject, throwError } from 'rxjs';
-import { ApiConfigService } from "./api-config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HostListService {
-
-  constructor(private http: HttpClient, private apiConfigService: ApiConfigService) { }
+  
+  private apiUrl: String = "http://localhost:3030/";
+  constructor(private http: HttpClient) { }
 
   getApiURL(path: string = ""): string{
-    return this.apiConfigService.getApiUrl() + path;
+    return this.apiUrl + path;
   };
 
   isConnected(): Observable<boolean>{
@@ -40,7 +40,7 @@ export class HostListService {
   }
 
   connectionTest(): Observable<String> {
-    return this.http.get<String>(this.apiConfigService.getApiUrl() + "connection").pipe(
+    return this.http.get<String>(this.apiUrl + "connection").pipe(
       catchError(this.handleError)
     );
 

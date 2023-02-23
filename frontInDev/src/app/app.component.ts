@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { config, Observable } from 'rxjs';
 
-import { ApiConfigService } from "./services/api-config.service";
+import { AuthService } from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -11,11 +9,10 @@ import { ApiConfigService } from "./services/api-config.service";
 })
 export class AppComponent {
   title = 'frontInDev';
-  constructor(private http: HttpClient, private apiConfigService: ApiConfigService) {
+  constructor(private auth: AuthService) {
 
   }
   ngOnInit() {
-
   }
 
 }

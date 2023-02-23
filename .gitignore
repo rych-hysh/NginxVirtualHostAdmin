@@ -46,3 +46,4 @@ frontInDev/.DS_Store
 frontInDev/Thumbs.db
 
 back/node_modules
+back/config/local.json

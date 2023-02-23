@@ -1,0 +1,10 @@
+{
+	"environment": "local",
+	"url": {
+		"protocol": "http",
+		"host": "localhost",
+		"port": 3030
+	},
+	"pathToKey": "/path/to/privatekey",
+	"pathToCert": "/path/to/cert"
+}
